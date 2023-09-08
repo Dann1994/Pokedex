@@ -1,0 +1,35 @@
+.pokeball {
+    width: 500px;
+    height: 500px;
+    position: absolute;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 40px solid #00000034;
+    transform: rotate(45deg);
+    .circle_ins {
+        width: 150px;
+        height: 150px;
+        position: absolute;
+        border-radius: 50%;
+        border: 30px solid #00000034;
+    }
+    .barra_i {
+        width: 33%;
+        position: absolute;
+        left: 0;
+        height: 35px;
+        background-color: #00000034;
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    .barra_r {
+        width: 33%;
+        position: absolute;
+        right: 0;
+        height: 35px;
+        background-color: #00000034;
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+}
