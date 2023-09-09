@@ -7,8 +7,8 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/poke_info' element={<PokemonInfo/>}/>
+        {/* <Route path='/' element={<Home/>}/> */}
+        <Route path='/' element={<PokemonInfo/>}/>
       </Routes>
     </>
   )
