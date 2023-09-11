@@ -1,6 +1,19 @@
+import { useState } from "react";
 
 
 export default function poke_info_functions() {
+
+    const [gradientStyle, setGradientStyle] = useState()
+
+    const crearGradiente = (tipos) => {
+        const gradiente = {
+            background: 
+            tipos.length == 2 ? 
+            'linear-gradient(to right,' + color(tipos[0]) + ',' + color(tipos[1]) + ')': 
+            'linear-gradient(to left,' + color(tipos[0]) + ',' + color(tipos[0]) + ')',
+        }
+        setGradientStyle(gradiente)
+    };
 
     const color = (tipo) => {
         var color = ''
@@ -68,6 +81,8 @@ export default function poke_info_functions() {
     }
 
     return {
-        color
+        color,
+        gradientStyle,
+        crearGradiente
     }
 }

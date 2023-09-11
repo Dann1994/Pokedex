@@ -1,14 +1,66 @@
 .home {
-    height: 100vh;
+    height: 100%;
     width: 100vw;
     flex-wrap: wrap;
     display: flex;
-    align-items: start;
+    justify-content: space-around;
     .poke_card {
         width: 200px;
         height: 100px;
-        background-color: black;
+        background-color: rgb(233, 76, 76);
         margin: 15px;
         border-radius: 15px;
+        position: relative;
+        padding: 15px;
+        box-shadow: 10px 10px 5px 0px #000000bf;
+        -webkit-box-shadow: 10px 10px 5px 0px #000000bf;
+        -moz-box-shadow: 10px 10px 5px 0px #000000bf;
+        cursor: pointer;
+        transition: 0.1s;
+        overflow: hidden;
+        &:hover {
+            width: 210px;
+            height: 110px;
+        }
+        h3 {
+            font-size: 100px;
+            position: absolute;
+            z-index: 1;
+            right: 0;
+            color: white;
+            opacity: 50%;
+        }
+        h2 {
+            color: white;
+            z-index: 2;
+            font-size: medium;
+            
+        }
+        .poke_img_card {
+            position: absolute;
+            z-index: 3;
+            top: 0;
+            right: 0;
+        }
+        .spinner {
+            zoom: 1.8;
+            position: absolute;
+            right: 35%;
+            top: 25%;
+            z-index: 10;
+        }
+    }
+}
+.vermas_container {
+    display: flex;
+    justify-content: center;
+    button {
+        border-radius: 15px;
+        border: none;
+        background-color: rgb(173, 45, 45);
+        color: white;
+        padding: 15px;
+        font-weight: 500;
+        margin: 10px;
     }
 }

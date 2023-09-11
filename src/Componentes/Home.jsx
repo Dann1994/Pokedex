@@ -1,11 +1,56 @@
-import { pokeCard } from "./pokeCard"
+import { useEffect, useState } from "react"
+import { authContext, useAuth } from "../Contexto/authContext"
+import Api_conection from "../Hooks/Api_conection"
+import { PokeCard } from "./PokeCard"
+import { BarNavHome } from "./BarNavHome"
+
 
 
 export const Home = () => {
+    const { tamanioApi, reiniciarDatos  } = useAuth()
+    const { obtenerApiTamanio } = Api_conection()
+    const [ cant, setCant ] = useState([1])
+    const [ cantCarg, setCantCarg] = useState(50)
+
+    const contarElementos = () => {
+        let nro = []
+        for (let i = 1; i <= cantCarg; i++) {
+            nro.push(i); 
+        }
+        return nro
+    }
+
+    const cargarMas = () => {
+        setCantCarg(cantCarg + 50)
+    }
+
+    useEffect(() => {
+        setCant(contarElementos)
+    }, [cantCarg])
+    
+
+    useEffect(() => {
+        obtenerApiTamanio('https://pokeapi.co/api/v2/pokemon-species/')
+    }, [])
+
+    useEffect(() => {
+        reiniciarDatos()
+    }, [])
+    
+
     return (
         <>
-            <div className='home'>
-                <pokeCard/>
+            <BarNavHome/>
+            <div className='home'> 
+            
+                {
+                    cant.map( c => 
+                        <PokeCard key={c} nro={c}/> 
+                    )
+                }
+            </div>
+            <div className="vermas_container">
+                <button onClick={cargarMas}>Mostrar 50 mas</button>
             </div>
         </>
     )

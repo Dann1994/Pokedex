@@ -1,21 +1,33 @@
 import { useEffect, useState } from "react"
+import { useAuth } from "../Contexto/authContext"
 
 export default function Api_conection() {
-    const [ id, setId ] = useState(1)
-    const [datos, setDatos] = useState({
-        imagen: '',
-        nombre: '',
-        tipos: ['?'],
-        entry: ''
-    })
 
-    const get_data = async (url) => {
+    /*
+        Datos del contexto
+    */
+    const {
+        idPoke,
+        setIdPoke,
+        pokemonDatos,
+        setPokemonDatos,
+        setTamanioApi
+    } = useAuth()
+
+    /*
+        Obtiene datos de la api que se pase su url por parámetro.
+        Devuelve un json.
+    */
+    const peticionApi = async (url) => {
         const peticion = await fetch(url)
-        const data = await peticion.json()
-        return data
+        const datos    = await peticion.json()
+        return datos
     }
 
-    const get_types = async (data) => {
+    /*
+        Obtiene los tipos desde los datos de un pokemon
+    */
+    const obtenerTipos = async (data) => {
         const { types } = data
         const tipos = types.map( tipo => 
             tipo.type.name
@@ -23,46 +35,82 @@ export default function Api_conection() {
         return tipos
     }
 
-    const get_entry = async () => {
-        const url = "https://pokeapi.co/api/v2/pokemon-species/" + id
-        const { flavor_text_entries } = await get_data(url)
-        const entry = flavor_text_entries.find( ent => ent.language.name == "es")
+    /*
+        Obtiene la entrada de la pokedex del pokemon actual.
+    */
+    const ObtenerEntrada = async () => {
+        const url = "https://pokeapi.co/api/v2/pokemon-species/" + idPoke
+        const { flavor_text_entries } = await peticionApi(url)
+        const entry = flavor_text_entries.find( ent => ent.language.name == "es") 
         return entry.flavor_text
     }
-    
-    const respuesta = async () => {
-        const url = "https://pokeapi.co/api/v2/pokemon/" + id
-        const data = await get_data(url)
-        const tipos = await get_types(data)
-        const entry = await get_entry()
-        const {sprites, name} = data
-        
-        setDatos({
-            ...[datos],
-            imagen: sprites.front_default,
+
+    /*
+        Toma los datos de una petición a la url dada y devulve
+        los datos necesarios del pokemon.
+    */
+    const pokeDatos = async (url) => {
+        const peticion = await peticionApi(url)
+        const { sprites, name} = peticion
+        const imagen    = sprites.front_default
+        const tipos     = await obtenerTipos(peticion)
+        const entrada   = await ObtenerEntrada()
+
+        const datos = {
+            imagen: imagen,
             nombre: name,
-            tipos: tipos,
-            entry: entry
-        })
+            tipos:  tipos,
+            entry:  entrada
+        }
+
+        return datos
     }
 
-    const siguietePoke = (cant) => {
-        setDatos({
-            ...[datos],
+    /*
+        Guarda los datos del pokemon obtenidos de la api en un estado local
+    */
+    const guardarPokeDatos = async () => {
+        const datos = await pokeDatos("https://pokeapi.co/api/v2/pokemon/" + idPoke)
+        setPokemonDatos(datos)
+    }
+
+
+    /*
+        Cambia el id del pokemon actual al siguiente segund el número dado
+        Si se usa "1" pasa al siguiete y con "-1" al anterior.
+        Antes de cambiar, limpia los datos anteriores dejando unos genericos.
+    */
+    const siguientePoke = (cant) => {
+        setPokemonDatos({
             imagen: '',
             nombre: '---',
-            tipos: datos.tipos,
+            tipos: pokemonDatos.tipos,
             entry: ''
         })
-        setId( Math.max(1, id + cant))
+        setIdPoke( Math.max(1, idPoke + cant))
     }
 
-    useEffect(() => {
-        respuesta()
-    }, [id])
+    /*
+        Cambia el id del pokemon actual según el número dado.
+    */
+    const cambiarPoke = async (nro) => {
+        setIdPoke(nro)
+        await guardarPokeDatos()
+    }
 
+    const obtenerApiTamanio = async (url) => {
+        const api = await peticionApi(url)
+        const tamanio = api.count
+        setTamanioApi(tamanio) 
+    }
 
-    return { respuesta, datos, siguietePoke, id} 
+    return {
+        siguientePoke,
+        cambiarPoke,
+        guardarPokeDatos,
+        pokeDatos,
+        obtenerApiTamanio
+    } 
 }
 
 
