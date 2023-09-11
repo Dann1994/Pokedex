@@ -30,7 +30,6 @@ export const PokeCard = ({nro}) => {
             imagen: imagen,
             tipos: tipos
         })
-        console.log(tipos); 
     } 
 
 
@@ -53,8 +52,8 @@ export const PokeCard = ({nro}) => {
             {
                 poke.imagen !== '' ?
                 <img className='poke_img_card' src={poke.imagen} alt="" /> :
-                <div class="spinner-border spinner" role="status">
-                    <span class="sr-only"></span>
+                <div className="spinner-border spinner" role="status">
+                    <span className="sr-only"></span>
                 </div>
             }
         </div>

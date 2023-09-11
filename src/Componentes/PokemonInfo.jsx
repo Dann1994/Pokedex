@@ -36,13 +36,12 @@ export const PokemonInfo = () => {
     });
 
     useEffect(() => {
-        crearGradiente(tipos)
         guardarPokeDatos()
     }, [idPoke])
 
     useEffect(() => {
         crearGradiente(tipos)
-    }, [siguientePoke])
+    }, [pokemonDatos])
 
     return (
         <>
@@ -78,8 +77,8 @@ export const PokemonInfo = () => {
                     <i onClick={() => siguientePoke(+1)} className="bi bi-caret-right arrows"></i>
                 </div> :
                 <div className="loading_screen" style={gradientStyle}>
-                    <div class="spinner-border text-light loadin_spinner" role="status">
-                        <span class="sr-only"></span>
+                    <div className="spinner-border text-light loadin_spinner" role="status">
+                        <span className="sr-only"></span>
                     </div>
                 </div>
             } 
