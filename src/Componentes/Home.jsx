@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import { authContext, useAuth } from "../Contexto/authContext"
 import Api_conection from "../Hooks/Api_conection"
-import { PokeCard } from "./PokeCard"
 import { BarNavHome } from "./BarNavHome"
+import { PokeCard } from "./pokeCard"
 
 
 
