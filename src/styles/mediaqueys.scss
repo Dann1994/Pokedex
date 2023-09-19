@@ -1,15 +1,20 @@
-@media screen and (max-width: 500px) {
-    .poke_info_container {
-        header {
-            display: initial;
-        }
-        .bi {
-            display: none;
-        }
-        .pokemon_data_container {
-            .pk_nro {
+@media screen and (max-width: 1200px) {
+    .header_home {
+        .nav_home {
+            .menu {
+                display: initial;
+            }
+            .buscador {
                 display: none;
             }
+            div {
+                display: none;
+            }
+            .buscar {
+                display: initial;
+            }
+
         }
     }
+    
 }

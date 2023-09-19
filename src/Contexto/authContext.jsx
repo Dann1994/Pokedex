@@ -11,31 +11,94 @@ export const useAuth = () => {
 
 export const AuthProvider = ({children}) => {
 
-    const [tamanioApi, setTamanioApi] = useState(1)
+    const { obtenerRegiones, obtenerNombres, obtenerDatosDePokemon, obtenerIdiomas } = Api_conection()
 
-    //Id del pokemon actual
-    const [ idPoke, setIdPoke ] = useState(1)
+    const [ regiones, setRegiones ] = useState([])
 
-    const datos = {
-        imagen: '',   //Imagen frontal 
-        nombre: '',   //Nombre del pokemon
-        tipos: ['?'], //Lista de tipos
-        entry: ''     //Entrada en la pokedex
+    const [ idiomas, setIdiomas ] = useState([])
+
+    const [ idioma, setIdioma ] = useState('es')
+
+    const [ region, setRegion ] = useState('kanto')
+
+    const [ nombresDePokemon, setNombresDePokemon ] = useState([])
+
+    const [ filtro, setFiltro ] = useState('') 
+
+
+    const pokeDatos = {
+        imagenes: '',
+        id: 0,
+        nombre: '???',
+        color: 'white',
+        entrada: '---',
+        specie: 'Pokemon',
+        tipos: '?'
     }
 
-    const [ pokemonDatos, setPokemonDatos] = useState(datos)
+    const [ pokemonActual, setPokemonActual ] = useState(pokeDatos)
 
-    const reiniciarDatos = () => {
-        setPokemonDatos(datos)
+
+    const guardarNombresDePokemon = async () => {
+        const nombres = await obtenerNombres(region)
+        setNombresDePokemon(nombres)
     }
+
+    const obtenerPokemonActual = async (nro) => {
+        setPokemonActual( await obtenerDatosDePokemon(nro, idioma))
+    }
+
+    const guardarIdiomas = async () => {
+        setIdiomas( await obtenerIdiomas())
+    }
+
+    const cambiarIdioma = ({target}) => {
+        const { value } = target
+        setIdioma( value )
+        console.log(value);
+    }
+
+    const cambiarRegion = ({target}) => {
+        const { value } = target
+        setRegion( value )
+        console.log(value);
+    }
+
+    const cambiarRegiones = async () => {
+        setRegiones( await obtenerRegiones() )
+    }
+
+    const buscar = ({ target }) => {
+        const { value } = target
+        setFiltro( value )
+    }
+
+
+    useEffect(() => {
+        cambiarRegiones()
+    }, [])
+    
+
+    useEffect(() => {
+        guardarNombresDePokemon()
+    }, [region])
+
+    useEffect(() => {
+        guardarIdiomas()
+    }, [])
+    
 
     return <authContext.Provider value={{ 
-        tamanioApi,
-        idPoke,
-        setIdPoke,
-        pokemonDatos,
-        setPokemonDatos,
-        setTamanioApi,
-        reiniciarDatos
+        nombresDePokemon,
+        obtenerPokemonActual,
+        idioma,
+        cambiarIdioma,
+        cambiarRegion,
+        region,
+        regiones,
+        buscar,
+        filtro,
+        guardarIdiomas,
+        idiomas
     }}>{children}</authContext.Provider>;
 }

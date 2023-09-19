@@ -1,9 +1,59 @@
 .header_home {
-    background-color: aqua;
+    background-color: #ff3c00;
     display: initial;
     width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    padding: 10px;
     .nav_home {
-        display: initial;
         width: 100%;
+        display: grid;
+        justify-items: center;
+        grid-template-columns: 1fr 5fr 1fr;
+        gap: 5px;
+        i {
+            color: white;
+            font-size: 30px;
+        }
+        .menu {
+            display: none;
+        }
+        .buscar {
+            display: none;
+        }
+        img {
+            width: 150px;
+        }
+        .buscador {
+            width: 50%;
+            height: 75%;
+            margin: 5px;
+            padding: 15px;
+            border-radius: 15px;
+            border: none;
+            &:focus {
+                border: none;
+                outline: none;
+            }
+        }
+        div {
+            display: flex;
+            justify-content: center;
+            select {
+                height: 75%;
+                margin: 5px;
+                padding: 5px;
+                width: auto;
+                background-color: #ff3c00;
+                border: 1px solid #0000000e;
+                border-radius: 15px;
+                color: white;
+                &:focus {
+                    border: none;
+                    outline: none;
+                }
+            }
+        }
     }
 }

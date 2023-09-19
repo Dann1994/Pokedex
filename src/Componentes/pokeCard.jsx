@@ -3,35 +3,28 @@ import Api_conection from '../Hooks/Api_conection'
 import { useNavigate } from 'react-router-dom'
 import poke_info_functions from '../Hooks/poke_info_functions'
 import { useAuth } from '../Contexto/authContext'
+import { Tipos } from './Tipos'
 
 
 export const PokeCard = ({nro}) => {
 
     const navigate = useNavigate()
 
-    const { reiniciarDatos } = useAuth()
+    const { idioma, filtro, region } = useAuth()
 
-    const { pokeDatos, cambiarPoke } = Api_conection()
+    const { crearGradiente, gradientStyle } = poke_info_functions()
 
-    const { gradientStyle, crearGradiente } = poke_info_functions()
+    const { pokemonDatos, guardarDatosPokemon } = Api_conection()
 
-    const [poke, setPoke ] = useState({
-        nombre: '---',
-        imagen: '',
-        tipos: []
-    })
+    const { tipos, id, nombre, imagenes} = pokemonDatos
 
-    const obt = async () => {
-        const data = await pokeDatos("https://pokeapi.co/api/v2/pokemon/" + nro)
-        const {nombre, imagen, tipos} = data
+    const filtrar = () => {
+        const info = nombre.toUpperCase()
+        const filtrardo = filtro.toUpperCase()
+        return info.includes(filtrardo)
+    }
 
-        setPoke({  
-            nombre: nombre,
-            imagen: imagen,
-            tipos: tipos
-        })
-    } 
-
+    
 
     const selectPoke = (nro) => {
         reiniciarDatos()
@@ -40,22 +33,29 @@ export const PokeCard = ({nro}) => {
     }
 
     useEffect(() => { 
-        obt() 
-        crearGradiente(poke.tipos)
-    }, [poke])
-    
+        guardarDatosPokemon( nro, idioma, region)
+    }, [idioma, region]) 
+
+    useEffect(() => {
+        crearGradiente(tipos) 
+    }, [tipos])
     
     return (
-        <div onClick={() => selectPoke(nro)} className='poke_card' style={gradientStyle}>
-            <h3>#{nro}</h3>
-            <h2 className='poke_num'>{poke.nombre.toUpperCase()}</h2>
-            {
-                poke.imagen !== '' ?
-                <img className='poke_img_card' src={poke.imagen} alt="" /> :
-                <div className="spinner-border spinner" role="status">
-                    <span className="sr-only"></span>
+        <>
+            { filtrar() &&
+                <div onClick={() => selectPoke(nro)} className="poke_card" style={gradientStyle} >
+                    <h3>#{id}</h3>
+                    <h2 className='poke_num'>{nombre.toUpperCase()}</h2>
+                    <Tipos tipos={tipos}/>
+                        {
+                            imagenes !== '' ?
+                            <img className='poke_img_card' src={imagenes.front_default} alt="" /> :
+                            <div className="spinner-border spinner" role="status">
+                                <span className="sr-only"></span>
+                            </div>
+                        }
                 </div>
             }
-        </div>
+        </>
     )
 }
