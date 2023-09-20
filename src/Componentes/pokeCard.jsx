@@ -21,7 +21,7 @@ export const PokeCard = ({nro}) => {
     const filtrar = () => {
         const info = nombre.toUpperCase()
         const filtrardo = filtro.toUpperCase()
-        return info.includes(filtrardo)
+        return info.includes(filtrardo) || id == filtrardo
     }
 
     

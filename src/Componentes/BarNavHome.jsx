@@ -20,7 +20,10 @@ export const BarNavHome = () => {
                         src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/2560px-International_Pok%C3%A9mon_logo.svg.png" 
                         alt="Pokemon"
                     />
-                    <input className='buscador' onChange={buscar} type="text" />
+                    <div className='buscar_group'>
+                        <input className='buscador' onChange={buscar} type="text" placeholder='Buscar' />
+                        <i className="bi bi-search"></i>
+                    </div>
 
                     <div>
                         <select onChange={cambiarRegion} name="Region" className='region' value={region}>
@@ -42,7 +45,7 @@ export const BarNavHome = () => {
             </header>
             <div class="offcanvas offcanvas-top" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
                 <div class="offcanvas-header">
-                    <input className='buscador' onChange={buscar} type="text" />
+                    <input className='buscador' onChange={buscar} type="text" placeholder='Buscar' />
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
