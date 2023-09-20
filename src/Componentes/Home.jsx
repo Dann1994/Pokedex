@@ -31,7 +31,7 @@ export const Home = () => {
             </div>
             { nombresDePokemon.length > limite &&
                 <div className="vermas_container">
-                    <button onClick={cargarMas}>Mostrar 50 mas</button>
+                    <button onClick={cargarMas}> 50+</button>
                 </div>
             }
         </>

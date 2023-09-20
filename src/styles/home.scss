@@ -68,10 +68,15 @@
     button {
         border-radius: 15px;
         border: none;
-        background-color: rgb(173, 45, 45);
+        background-color: #ff3c00;
         color: white;
         padding: 15px;
         font-weight: 500;
         margin: 10px;
+        transition: 0.3s;
+        &:hover {
+            background-color: #f85f31;
+            font-weight: 700;
+        }
     }
 }
