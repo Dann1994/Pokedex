@@ -4,7 +4,7 @@ export default function Api_conection() {
 
     const [ pokemonDatos, setPokemonDatos ] = useState( {
         imagenes: '',
-        id: 0,
+        id: '?',
         nombre: '???',
         color: 'white',
         entrada: '---',
