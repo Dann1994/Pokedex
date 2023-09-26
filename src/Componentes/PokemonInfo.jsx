@@ -1,87 +1,51 @@
-import { useEffect } from "react";
-import Api_conection from "../Hooks/Api_conection";
-import poke_info_functions from "../Hooks/poke_info_functions";
-import { Pokemon_imagen } from "./Pokemon_imagen";
-import { IdNumber } from "./IdNumber";
-import { Nav_bar } from "./Nav_var";
-import { useAuth } from "../Contexto/authContext";
+import { useNavigate } from "react-router-dom"
+import { useAuth } from "../Contexto/authContext"
+import Api_conection from "../Hooks/Api_conection"
+import poke_info_functions from "../Hooks/poke_info_functions"
+import { useEffect } from "react"
 
 
 export const PokemonInfo = () => {
 
-    const { siguientePoke, guardarPokeDatos } = Api_conection()
+    const navigate = useNavigate()
 
-    const { idPoke, pokemonDatos } = useAuth()
+    const { idioma, filtro, region, pokemonSelect, siguientePokemon, nombresDePokemon } = useAuth()
 
-    const { imagen, nombre, tipos, entry } = pokemonDatos
+    const { crearGradiente, gradientStyle } = poke_info_functions()
 
-    const { color, gradientStyle, crearGradiente } = poke_info_functions()
+    const { pokemonDatos, guardarDatosPokemon } = Api_conection()
 
-    
+    const { tipos, id, nombre, imagenes, entrada, specie } = pokemonDatos
 
-    const handleKeyDown = (event) => {
-        if (event.key === 'ArrowRight') {
-            siguientePoke(+1);
-        } else if (event.key === 'ArrowLeft') {
-            siguientePoke(-1);
-        }
-    };
+    useEffect(() => { 
+        guardarDatosPokemon( nombresDePokemon[pokemonSelect - 1], idioma, region)
+    }, [idioma, region, pokemonSelect]) 
 
     useEffect(() => {
-        window.addEventListener('keydown', handleKeyDown);
-        // Limpia el listener cuando el componente se desmonta
-        return () => {
-            window.removeEventListener('keydown', handleKeyDown);
-        };
-    });
-
-    useEffect(() => {
-        guardarPokeDatos()
-    }, [idPoke])
-
-    useEffect(() => {
-        crearGradiente(tipos)
-    }, [pokemonDatos])
+        crearGradiente(tipos) 
+    }, [tipos])
 
     return (
-        <>
-            {
-                imagen !== ''?
-                <div className="poke_info_container" style={gradientStyle}>
-                    <Nav_bar id={idPoke} funcion={siguientePoke}/>
-                    <i onClick={() => siguientePoke(-1)} className="bi bi-caret-left arrows"></i>
-                    <div className="pokemon_img_container">
-                        <IdNumber id={idPoke}/>
-                        <Pokemon_imagen img={imagen}/>
-                    </div>
-                    <div className="pokemon_data_container">
-                        <div className="types_contaner">
-                            <button style={{background: color(tipos[0]) }} className='tipo_item'>
-                                {tipos[0].toUpperCase()}
-                            </button>
-                            {
-                                tipos.length == 2 &&
-                                <button style={{background: color(tipos[1]) }} className='tipo_item'>
-                                    {tipos[1].toUpperCase()}
-                                </button>
-                            }
-                        </div>
-                        <h2>{nombre.toUpperCase()}</h2>
-                        <p className="pk_nro">#{idPoke}</p>
-                        <div className="entry_container">
-                            <p>
-                                {entry}
-                            </p>
-                        </div>
-                    </div>
-                    <i onClick={() => siguientePoke(+1)} className="bi bi-caret-right arrows"></i>
-                </div> :
-                <div className="loading_screen" style={gradientStyle}>
-                    <div className="spinner-border text-light loadin_spinner" role="status">
-                        <span className="sr-only"></span>
+        <div className="poke_info_backgroud">
+            <div className="poke_info_container" style={gradientStyle}>
+                <div className="grid_item poke_img">
+                    <h1>{nombre.toUpperCase()}</h1>
+                    <div className="poke_img_container" >
+                        <img src={imagenes.front_default} alt=""/>
                     </div>
                 </div>
-            } 
-        </>
+                <div className="grid_item poke_select">
+                    <i class="bi bi-caret-left-fill" onClick={ () => siguientePokemon(-1)}/>
+                    <h3>#{id}</h3>
+                    <i class="bi bi-caret-right-fill" onClick={ () => siguientePokemon(1)}/>
+                </div>
+                <div className="grid_item poke_desc">
+                    <h2>{specie.toUpperCase()}</h2>
+                    <div className="poke_desc_container">
+                        <p>{entrada}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     )
 }

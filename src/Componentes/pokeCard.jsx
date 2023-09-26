@@ -10,7 +10,7 @@ export const PokeCard = ({nro}) => {
 
     const navigate = useNavigate()
 
-    const { idioma, filtro, region } = useAuth()
+    const { idioma, filtro, region, cambiarPokemon } = useAuth()
 
     const { crearGradiente, gradientStyle } = poke_info_functions()
 
@@ -24,12 +24,11 @@ export const PokeCard = ({nro}) => {
         return info.includes(filtrardo) || id == filtrardo
     }
 
-    
-
     const selectPoke = (nro) => {
-        reiniciarDatos()
-        cambiarPoke(nro)
-        navigate('/poke_info')
+        if (nombre !== '???') {
+            cambiarPokemon(nro)
+            navigate('/poke_info')
+        }
     }
 
     useEffect(() => { 
@@ -43,7 +42,7 @@ export const PokeCard = ({nro}) => {
     return (
         <>
             { filtrar() &&
-                <div onClick={() => selectPoke(nro)} className="poke_card" style={gradientStyle} >
+                <div onClick={() => selectPoke(id)} className="poke_card" style={gradientStyle} >
                     <h3>#{id}</h3>
                     <h2 className='poke_num'>{nombre.toUpperCase()}</h2>
                     <Tipos tipos={tipos}/>

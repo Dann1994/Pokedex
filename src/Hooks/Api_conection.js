@@ -2,7 +2,7 @@ import { useState } from "react"
 
 export default function Api_conection() {
 
-    const [ pokemonDatos, setPokemonDatos ] = useState( {
+    const datos = {
         imagenes: '',
         id: '?',
         nombre: '???',
@@ -10,7 +10,9 @@ export default function Api_conection() {
         entrada: '---',
         specie: 'Pokemon',
         tipos: [ { nombre: '?', id: 0 } ]
-    })
+    }
+
+    const [ pokemonDatos, setPokemonDatos ] = useState(datos)
 
     const peticionApi = async (url) => {
         const peticion = await fetch(url)

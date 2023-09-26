@@ -13,6 +13,8 @@ export const AuthProvider = ({children}) => {
 
     const { obtenerRegiones, obtenerNombres, obtenerDatosDePokemon, obtenerIdiomas } = Api_conection()
 
+    const [ pokemonSelect, setPokemonSelect ] = useState(1)
+
     const [ regiones, setRegiones ] = useState([])
 
     const [ idiomas, setIdiomas ] = useState([])
@@ -73,6 +75,18 @@ export const AuthProvider = ({children}) => {
         setFiltro( value )
     }
 
+    const cambiarPokemon = (nro) => {
+        setPokemonSelect(nro)
+    }
+
+    const siguientePokemon = (nro) => {
+        const max = nombresDePokemon.length
+        const min = Math.max(1, (pokemonSelect + nro))
+        const nuevo = Math.min(max, min)
+        setPokemonSelect(nuevo);
+        console.log(pokemonSelect);
+    }
+
 
     useEffect(() => {
         cambiarRegiones()
@@ -99,6 +113,9 @@ export const AuthProvider = ({children}) => {
         buscar,
         filtro,
         guardarIdiomas,
-        idiomas
+        idiomas,
+        pokemonSelect,
+        cambiarPokemon,
+        siguientePokemon
     }}>{children}</authContext.Provider>;
 }

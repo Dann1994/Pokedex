@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react"
-import { authContext, useAuth } from "../Contexto/authContext"
+import { useState } from "react"
+import { useAuth } from "../Contexto/authContext"
 import { BarNavHome } from "./BarNavHome"
 import { PokeCard } from "./pokeCard"
 
