@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useAuth } from "../Contexto/authContext"
-import { BarNavHome } from "./BarNavHome"
+import { BarNavHome } from "./NavBarHome"
 import { PokeCard } from "./pokeCard"
 
 

@@ -1,14 +1,12 @@
 import React from 'react'
 import { useAuth } from '../Contexto/authContext'
+import { SelectRegion } from './SelectRegion'
+import { SelectIdioma } from './SelectIdioma'
+
 
 export const BarNavHome = () => {
     
     const { idioma, buscar, cambiarIdioma, cambiarRegion, region, regiones, idiomas } = useAuth() 
-
-    const filtrar = ({target}) => {
-        const { value } = target
-        setFiltro(value.trim());
-    }
 
     return (
         <>
@@ -26,20 +24,8 @@ export const BarNavHome = () => {
                     </div>
 
                     <div>
-                        <select onChange={cambiarRegion} name="Region" className='region' value={region}>
-                            {
-                                regiones.map( r => 
-                                    <option key={r} value={r}>{r}</option>
-                                )
-                            }
-                        </select>
-                        <select onChange={cambiarIdioma} className='lenguage' name="idioma" value={idioma}>
-                            {
-                                idiomas.map( i => 
-                                    <option key={i} value={i}>{i}</option>
-                                )
-                            }
-                        </select>
+                        <SelectRegion regiones={regiones} region={region} funcion={cambiarRegion}/>
+                        <SelectIdioma idiomas={idiomas} idioma={idioma} funcion={cambiarIdioma}/>
                     </div>
                 </nav>
             </header>

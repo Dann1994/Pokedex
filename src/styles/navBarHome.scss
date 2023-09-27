@@ -53,21 +53,7 @@
         }
         div {
             display: flex;
-            justify-content: center;
-            select {
-                height: 75%;
-                margin: 5px;
-                padding: 5px;
-                width: auto;
-                background-color: #ff3c00;
-                border: 1px solid #0000000e;
-                border-radius: 15px;
-                color: white;
-                &:focus {
-                    border: none;
-                    outline: none;
-                }
-            }
+            justify-content: space-around;
         }
     }
 }

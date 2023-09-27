@@ -6,60 +6,8 @@
     justify-content: center;
     background-image: url('../assets/fondo.png');
     background-attachment:fixed;
-    .cards_content {
-        width: 90%;
-        flex-wrap: wrap;
-        display: flex;
-        justify-content: space-around;
-        .poke_card {
-            width: 200px;
-            height: 100px;
-            background-color: rgb(233, 76, 76);
-            margin: 15px;
-            border-radius: 15px;
-            position: relative;
-            padding: 15px;
-            box-shadow: 10px 10px 5px 0px #00000083;
-            -webkit-box-shadow: 10px 10px 5px 0px #00000083;
-            -moz-box-shadow: 10px 10px 5px 0px #00000083;
-            cursor: pointer;
-            transition: 0.1s;
-            overflow: hidden;
-            border: 2px solid #00000041;
-            &:hover {
-                width: 210px;
-                height: 110px;
-            }
-            h3 {
-                font-size: 105px;
-                position: absolute;
-                font-weight: 700;
-                right: 0;
-                top: 0;
-                mix-blend-mode: difference;
-            }
-            h2 {
-                font-size: medium;
-                font-weight: 900;
-                color: #ffffffc0;
-            }
-            .poke_img_card {
-                position: absolute;
-                z-index: 3;
-                top: 0;
-                right: 0;
-            }
-            .spinner {
-                zoom: 1.8;
-                position: absolute;
-                right: 35%;
-                top: 25%;
-                z-index: 3;
-                opacity: 50%;
-            }
-        }
-    }
 }
+
 .vermas_container {
     display: flex;
     justify-content: center;

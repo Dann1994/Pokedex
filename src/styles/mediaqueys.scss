@@ -16,6 +16,49 @@
 
         }
     }
+
+    .poke_info_backgroud {
+        .poke_info_container {
+            border-radius: initial;
+            width: 100%;
+            height: 100%;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-areas:
+            "nav nav "
+            "img img "
+            "desc desc"
+            "desc desc"
+            "desc desc"
+            "desc desc"
+            ;
+
+            .poke_nav {
+                
+            }
+
+            .poke_img {
+                justify-content: initial;
+            }
+
+            .poke_select {
+                display: none;
+            }
+
+            .poke_desc {
+                padding: 0;
+                justify-content: inherit;
+                .poke_desc_container {
+                    height: 95%;
+                    width: 98%;
+                    p {
+                        font-size: 25px;
+                    }
+                }
+            }
+        }
+        }
+
+        
     
 }
 

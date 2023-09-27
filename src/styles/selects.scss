@@ -1,0 +1,29 @@
+select {
+    height: 75%;
+    margin: 5px;
+    padding: 5px;
+    background-color: transparent;
+    border: 2px solid #0000000e;
+    border-radius: 15px;
+    color: white;
+    margin: 50px;
+    &:focus {
+        border: none;
+        outline: none;
+        border: 2px solid #0000000e;
+        border-radius: 15px;
+    }
+    option {
+        background-color: white;
+        color: red;
+        font-weight: 500;
+    }
+
+}
+
+.idioma {
+    width: 60px;
+}
+.region {
+    width: auto;
+}
