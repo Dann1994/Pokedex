@@ -35,9 +35,11 @@ export const PokemonInfo = () => {
                 </div>
                 <div className="grid_item poke_img">
                     <h1>{nombre.toUpperCase()}</h1>
+                    <i className="bi bi-caret-left-fill" onClick={ () => siguientePokemon(-1)}/>
                     <div className="poke_img_container" >
                         <img src={imagenes.front_default} alt=""/>
                     </div>
+                    <i className="bi bi-caret-right-fill" onClick={ () => siguientePokemon(1)}/>
                     <div className="tipos_info_container">
                         {
                             tipos.map( t => 

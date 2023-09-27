@@ -44,6 +44,7 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            position: relative;
             h1 {
                 color: #ffffffca;
                 font-weight: 800;
@@ -62,6 +63,21 @@
                     width: 100%;
                 }
             }
+            i{
+                display: none;
+                color: #ffffff49;
+                position: absolute;
+                top: 35%;
+                transform: translateY(-50%);
+                font-size: 100px;
+            }
+            .bi-caret-left-fill {
+                left: 0;
+            }
+            .bi-caret-right-fill {
+                right: 0;
+            }
+
         }
         .poke_select {
             grid-area: sel;
