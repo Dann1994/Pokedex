@@ -30,14 +30,18 @@
             "desc desc"
             "desc desc"
             "desc desc"
+            "desc desc"
             ;
 
-            .poke_nav {
-                
+            .poke_nav { 
+                height: 50px;
             }
-
             .poke_img {
                 justify-content: initial;
+                .poke_img_container {
+                    width: 200px;
+                    height: 200px;
+                }
             }
 
             .poke_select {
