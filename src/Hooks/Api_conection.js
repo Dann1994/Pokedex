@@ -66,14 +66,14 @@ export default function Api_conection() {
 
         const datosEscie = await peticionApi('https://pokeapi.co/api/v2/pokemon-species/' + pokemon)
 
-        const { names, color, flavor_text_entries, genera, pokedex_numbers } = datosEscie
+        const { names, color, flavor_text_entries, genera, pokedex_numbers, id:order } = datosEscie
         const numero = pokedex_numbers.find( n => n.pokedex.name == region)
         const id = numero.entry_number
         const nombre = names.find( e => e.language.name == idioma).name
         const entrada = flavor_text_entries.find( e => e.language.name == idioma).flavor_text
         const especie = genera.find( e => e.language.name == idioma).genus
 
-        const datosPokemon = await obtenerDeEspecie('https://pokeapi.co/api/v2/pokemon/' + pokemon)
+        const datosPokemon = await obtenerDeEspecie('https://pokeapi.co/api/v2/pokemon/' + order)
         const { sprites, types } = datosPokemon
         const tiposUrls = types.map( t => t.type.name)  
         const tipos = await obtenerTipos(tiposUrls, idioma)

@@ -16,8 +16,8 @@
         grid-template-rows: auto;
         border: 5px solid #00000041;
         box-shadow: 10px 10px 5px 0px #00000083;
-            -webkit-box-shadow: 10px 10px 5px 0px #00000083;
-            -moz-box-shadow: 10px 10px 5px 0px #00000083;
+                    -webkit-box-shadow: 10px 10px 5px 0px #00000083;
+                    -moz-box-shadow: 10px 10px 5px 0px #00000083;
         grid-template-areas:
         "img img desc desc"
         "img img desc desc"
@@ -36,8 +36,8 @@
                 font-weight: 800;
             }
             .poke_img_container {
-                width: 250px;
-                height: 250px;
+                width: 400px;
+                height: 400px;
                 border-radius: 15px;
                 display: flex;
                 justify-content: center;
