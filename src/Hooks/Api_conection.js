@@ -14,6 +14,7 @@ export default function Api_conection() {
 
     const [ pokemonDatos, setPokemonDatos ] = useState(datos)
 
+
     const peticionApi = async (url) => {
         const peticion = await fetch(url)
         const datos    = await peticion.json()
@@ -85,7 +86,8 @@ export default function Api_conection() {
             color: color.name,
             entrada: entrada,
             specie: especie,
-            tipos: tipos
+            tipos: tipos,
+            order: order
         }
         return(datos);
     }

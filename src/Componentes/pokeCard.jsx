@@ -16,7 +16,7 @@ export const PokeCard = ({nro}) => {
 
     const { pokemonDatos, guardarDatosPokemon } = Api_conection()
 
-    const { tipos, id, nombre, imagenes} = pokemonDatos
+    const { tipos, id, nombre, imagenes, order} = pokemonDatos
 
     const filtrar = () => {
         const info = nombre.toUpperCase()
@@ -27,7 +27,7 @@ export const PokeCard = ({nro}) => {
     const selectPoke = (nro) => {
         if (nombre !== '???') {
             cambiarPokemon(nro)
-            navigate('/poke_info')
+            navigate('/poke_info?id=' + nro + '&region=' + region )
         }
     }
 
@@ -42,7 +42,7 @@ export const PokeCard = ({nro}) => {
     return (
         <>
             { filtrar() &&
-                <div onClick={() => selectPoke(id)} className="poke_card" style={gradientStyle} >
+                <div onClick={() => selectPoke(order)} className="poke_card" style={gradientStyle} >
                     <h3>#{id}</h3>
                     <h2 className='poke_num'>{nombre.toUpperCase()}</h2>
                     <Tipos tipos={tipos}/>

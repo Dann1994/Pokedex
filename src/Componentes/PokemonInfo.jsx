@@ -10,17 +10,41 @@ export const PokemonInfo = () => {
 
     const navigate = useNavigate()
 
-    const { idioma, region, pokemonSelect, siguientePokemon, nombresDePokemon, idiomas, cambiarIdioma } = useAuth()
+    const { idioma, region, pokemonSelect, idiomas, cambiarIdioma } = useAuth()
 
     const { crearGradiente, gradientStyle, color } = poke_info_functions()
 
     const { pokemonDatos, guardarDatosPokemon } = Api_conection()
 
-    const { tipos, id, nombre, imagenes, entrada, specie } = pokemonDatos
+    const { tipos, id, nombre, imagenes, entrada, specie, order } = pokemonDatos
+
+    const getIdurl = () => {
+        const url = new URL(window.location.href);
+
+        const params = url.searchParams;
+
+        const id = params.get("id");
+
+        return parseInt(id)
+    }
+
+    const getRegion = () => {
+        const url = new URL(window.location.href);
+
+        const params = url.searchParams;
+
+        const region = params.get("region");
+
+        return region
+    }
+
+    const cambiarPokemon = (nro) => {
+        navigate('/poke_info?id=' + (getIdurl() + nro) + '&region=' + getRegion() );
+    }
     
     useEffect(() => { 
-        guardarDatosPokemon( nombresDePokemon[pokemonSelect - 1], idioma, region)
-    }, [idioma, region, pokemonSelect]) 
+        guardarDatosPokemon(getIdurl(), idioma, getRegion())
+    }, [idioma, region, pokemonSelect, cambiarPokemon]) 
 
     useEffect(() => {
         crearGradiente(tipos) 
@@ -35,11 +59,11 @@ export const PokemonInfo = () => {
                 </div>
                 <div className="grid_item poke_img">
                     <h1>{nombre.toUpperCase()}</h1>
-                    <i className="bi bi-caret-left-fill" onClick={ () => siguientePokemon(-1)}/>
+                    <i className="bi bi-caret-left-fill" onClick={ () => cambiarPokemon(-1)}/>
                     <div className="poke_img_container" >
                         <img src={imagenes.front_default} alt=""/>
                     </div>
-                    <i className="bi bi-caret-right-fill" onClick={ () => siguientePokemon(1)}/>
+                    <i className="bi bi-caret-right-fill" onClick={ () => cambiarPokemon(1)}/>
                     <div className="tipos_info_container">
                         {
                             tipos.map( t => 
@@ -49,9 +73,9 @@ export const PokemonInfo = () => {
                     </div>
                 </div>
                 <div className="grid_item poke_select">
-                    <i className="bi bi-caret-left-fill" onClick={ () => siguientePokemon(-1)}/>
+                    <i className="bi bi-caret-left-fill" onClick={ () => cambiarPokemon(-1)}/>
                     <h3>#{id}</h3>
-                    <i className="bi bi-caret-right-fill" onClick={ () => siguientePokemon(1)}/>
+                    <i className="bi bi-caret-right-fill" onClick={ () => cambiarPokemon(1)}/>
                 </div>
                 <div className="grid_item poke_desc">
                     <h2>{specie.toUpperCase()}</h2>

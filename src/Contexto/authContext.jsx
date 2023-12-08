@@ -83,8 +83,7 @@ export const AuthProvider = ({children}) => {
         const max = nombresDePokemon.length
         const min = Math.max(1, (pokemonSelect + nro))
         const nuevo = Math.min(max, min)
-        setPokemonSelect(nuevo);
-        console.log(pokemonSelect);
+        return nuevo
     }
 
 
